@@ -5,14 +5,14 @@
 #include "Function.h"
 
 /*** 1変数多項式 ***/
-Function::Function(VectorXd b) {
-    std::cout << "Create Function" << std::endl;
+Polynomial::Polynomial(VectorXd b){
+    std::cout << "Create Polynomial" << std::endl;
     n = b.size();
     a = b;
 }
 
 /*** 関数の値を出力する ***/
-double Function::f(double x) {
+double Polynomial::f(double x) {
     double y = 0;
     for(int i = 0; i < n; i++) {
         y += a[i] * pow(x, i);
@@ -20,23 +20,13 @@ double Function::f(double x) {
     return y;
 }
 
-double Function::df(double x) {
+double Polynomial::df(double x) {
     return (f(x+dx) - f(x)) / dx;
 }
 
-double Function::d2f(double x) {
+double Polynomial::d2f(double x) {
     return (df(x+dx) -df(x)) / dx;
 }
-
-/*
-double Function::df(double x) {
-    double y = 0;
-    for (int i = 1; i < len; i++) {
-        y += a[i] * i * pow(x, i-1);
-    }
-    return y;
-}
-*/
 
 
 /*** 1次形式 ***/

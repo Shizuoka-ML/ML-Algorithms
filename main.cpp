@@ -8,20 +8,20 @@ int main() {
     /*** Functionの動作確認 ***/
     VectorXd a(3); // 係数ベクトル
     a << 4, -4, 1;
-    Function func(a);
+    Polynomial poly(a);
     double x = 2;
-    double y = func.f(x);
-    double dy = func.df(x);
-    double d2y = func.d2f(x);
+    double y = poly.f(x);
+    double dy = poly.df(x);
+    double d2y = poly.d2f(x);
     std::cout << "Function-y: " << y << std::endl;
     std::cout << "Function-dy: " << dy << std::endl;
     std::cout << "Function-d2y: " << d2y << "\n" << std::endl;
 
     /*** 1変数ニュートン法の動作確認 ***/
     Numerical_Analysis na;
-    x = na.newtons_method(7, func);
+    x = na.Newtons_Method(7, poly);
     std::cout << "newtons method(Function) resX: " << x << std::endl;
-    std::cout << "newtons method(Function) resY: " << func.f(x) << "\n" << std::endl;
+    std::cout << "newtons method(Function) resY: " << poly.f(x) << "\n" << std::endl;
 
     /*** 1次形式の動作確認 ***/
     VectorXd b(3);

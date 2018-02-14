@@ -13,7 +13,8 @@ public:
     double epsilon = 1e-4;
 
     Numerical_Analysis();
-    double newtons_method(double init, Function func);
+    /*** 1変数ニュートン法 ***/
+    double Newtons_Method(double init, Polynomial poly);
 };
 
 #endif //ML_ALGORITHMS_NUMERICAL_ANALYSIS_H
