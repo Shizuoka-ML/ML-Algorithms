@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Eigen/Core"
 #include "Eigen/Geometry"
+#include "Eigen/LU"
 
 using namespace Eigen;
 
@@ -65,6 +66,8 @@ public:
  * @def f(x) : ベクトルを受け取り，関数値を返却
  * @def rdf(n, x) : 偏微分結果のベクトルを返却
  * @def rd2f(n, x) : 2階偏微分の結果を返却
+ * @def isPositive() : 2次形式が正定値かどうかを返却(0:正定値でない, 1:正定値, 2:半正定値)
+ * @def isNegative() : 2次形式が負定値かどうかを返却(0:負定値でない, 1:負定値, 2:半負定値)
  */
 class QuadraticForm {
 public:
@@ -75,7 +78,9 @@ public:
     explicit QuadraticForm(MatrixXd b);
     double f(VectorXd x);
     VectorXd rdf(VectorXd x);
-    VectorXd rd2f(VectorXd x);
+    MatrixXd rd2f(VectorXd x);
+    int isPositive();
+    int isNegative();
 };
 
 #endif //ML_ALGORITHMS_FUNCTION_H

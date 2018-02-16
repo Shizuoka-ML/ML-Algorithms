@@ -38,17 +38,31 @@ int main() {
 
     /*** 2次形式の動作確認 ***/
     MatrixXd m(2, 2);
-    m << 1, 1,
-            2, 2;
+    m << 3, 1,
+            1, 2;
     VectorXd X2(2);
     X2 << 2, 3;
     QuadraticForm qf(m);
-    f = qf.f(X2);
-    rdf = qf.rdf(X2);
-    rd2f = qf.rd2f(X2);
-    std::cout << "QuadraticForm-f: " << f << std::endl;
-    std::cout << "QuadraticForm-rdf:\n" << rdf << std::endl;
-    std::cout << "QuadraticForm-rd2f:\n" << rd2f << std::endl;
+    double quad_f = qf.f(X2);
+    VectorXd quad_rdf = qf.rdf(X2);
+    MatrixXd quad_rd2f = qf.rd2f(X2);
+    std::cout << "QuadraticForm-f: " << quad_f << std::endl;
+    std::cout << "QuadraticForm-rdf:\n" << quad_rdf << std::endl;
+    std::cout << "QuadraticForm-rd2f:\n" << quad_rd2f << std::endl;
+    int pos = qf.isPositive();
+    int neg = qf.isNegative();
+    if (pos == 0 && neg == 0)
+        std::cout << "Indefinite" << std::endl;
+    else if(pos == 1)
+        std::cout << "Positive-definite" << std::endl;
+    else if(pos == 2)
+        std::cout << "Positive-semidefinite" << std::endl;
+    else if(neg == 1)
+        std::cout << "Negative-definite" << std::endl;
+    else if(neg == 2)
+        std::cout << "Negative-semidefinite" << std::endl;
+
+    std::cout << "\nEND" << std::endl;
 
 
     return 0;

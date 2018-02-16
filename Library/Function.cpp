@@ -64,12 +64,48 @@ VectorXd QuadraticForm::rdf(VectorXd x) {
     return 2 * A * x;
 }
 
-// チェックが必要
-VectorXd QuadraticForm::rd2f(VectorXd x) {
-    VectorXd res(n);
-    for(int i = 0; i < n; i++) {
-        res(i) = 2 * A(i, i);
+MatrixXd QuadraticForm::rd2f(VectorXd x) {
+    return 2 * A;
+}
+
+/*** シルベスターの定理による導出 ***/
+int QuadraticForm::isPositive() {
+    MatrixXd tmp;
+    double d;
+    int res = 1;
+    int i = 0;
+    while(i < n) {
+        tmp = A.block(0, 0, i+1, i+1);
+        d = tmp.determinant();
+        if(d < 0) {
+            res = 0;
+            break;
+        } else if(d == 0) {
+            res = 2;
+        }
+        i++;
     }
     return res;
 }
+
+/*** シルベスターの定理による導出 ***/
+int QuadraticForm::isNegative() {
+    MatrixXd tmp;
+    double d;
+    int res = 1, sign = -1;
+    int i = 0;
+    while(i < n) {
+        tmp = A.block(0, 0, i+1, i+1);
+        d = tmp.determinant() * pow(sign, i+1);
+        if(d < 0) {
+            res = 0;
+            break;
+        } else if(d == 0) {
+            res = 2;
+        }
+        i++;
+    }
+    return res;
+}
+
 
