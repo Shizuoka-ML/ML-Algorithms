@@ -35,4 +35,8 @@ Machine Learning 関連のアルゴリズムの実装記録
 ### Newtons_Method
 1変数のニュートン法
 
+### Gradient_Method
+1変数の勾配法
+- 現状，上に凸かつ唯一の最小値を持つ関数に対してのみ有効
+
 

@@ -7,7 +7,7 @@ using namespace Eigen;
 int main() {
     /*** Functionの動作確認 ***/
     VectorXd a(3); // 係数ベクトル
-    a << 4, -4, 1;
+    a << -4, 4, -1;
     Polynomial poly(a);
     double x = 2;
     double y = poly.f(x);
@@ -17,11 +17,17 @@ int main() {
     std::cout << "Function-dy: " << dy << std::endl;
     std::cout << "Function-d2y: " << d2y << "\n" << std::endl;
 
-    /*** 1変数ニュートン法の動作確認 ***/
+    /*** 1変数のニュートン法の動作確認 ***/
     Numerical_Analysis na;
-    x = na.Newtons_Method(7, poly);
-    std::cout << "newtons method(Function) resX: " << x << std::endl;
-    std::cout << "newtons method(Function) resY: " << poly.f(x) << "\n" << std::endl;
+    x = na.Newtons_Method(poly);
+    std::cout << "Newton's Method(Polynomial) resX: " << x << std::endl;
+    std::cout << "Newton's Method(Polynomial) resY: " << poly.f(x) << "\n" << std::endl;
+
+    /*** 1変数の勾配法の動作確認 ***/
+    x = na.Gradient_Method(poly);
+    std::cout << "Gradient Method(Polynomial) resX: " << x << std::endl;
+    std::cout << "Gradient Method(Polynomial) resY: " << poly.f(x) << "\n" << std::endl;
+
 
     /*** 1次形式の動作確認 ***/
     VectorXd b(3);
